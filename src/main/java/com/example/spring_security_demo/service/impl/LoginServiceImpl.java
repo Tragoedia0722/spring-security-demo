@@ -4,6 +4,7 @@ import com.example.spring_security_demo.domain.LoginUser;
 import com.example.spring_security_demo.domain.dto.VerifyUserDTO;
 import com.example.spring_security_demo.service.LoginService;
 import com.example.spring_security_demo.util.JwtUtils;
+import com.example.spring_security_demo.util.RedisCache;
 import com.example.spring_security_demo.util.ResultUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,8 @@ import java.util.Objects;
 public class LoginServiceImpl implements LoginService {
     @Resource
     private AuthenticationManager authenticationManager;
+    @Resource
+    private RedisCache redisCache;
 
     @Override
     public ResultUtils<Object> login(VerifyUserDTO verifyUserDTO) {
@@ -34,6 +37,9 @@ public class LoginServiceImpl implements LoginService {
         String jwt = JwtUtils.createJWT(id);
         Map<String, String> map = new HashMap<>();
         map.put("token", jwt);
+
+        redisCache.setCacheObject("login:" + id, loginUser);
+
         return ResultUtils.success("登陆成功", map);
     }
 }

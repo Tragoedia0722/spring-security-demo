@@ -55,11 +55,11 @@ public class ResultUtils<T> {
     }
 
     public static <T> ResultUtils<T> failure(String msg) {
-        return new ResultUtils(ResultConstants.RESULT_STATUS_FAILURE, ResultConstants.RESULT_CODE_OK, msg);
+        return new ResultUtils(ResultConstants.RESULT_STATUS_FAILURE, ResultConstants.RESULT_CODE_FAILURE, msg);
     }
 
     public static <T> ResultUtils<T> failure() {
-        return new ResultUtils(ResultConstants.RESULT_STATUS_FAILURE, ResultConstants.RESULT_CODE_OK, ResultConstants.RESULT_MSG_FAILURE);
+        return new ResultUtils(ResultConstants.RESULT_STATUS_FAILURE, ResultConstants.RESULT_CODE_FAILURE, ResultConstants.RESULT_MSG_FAILURE);
     }
 
     public static <T> ResultUtils<T> error(String msg) {

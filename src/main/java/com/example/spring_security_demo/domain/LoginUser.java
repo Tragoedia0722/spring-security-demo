@@ -1,16 +1,19 @@
 package com.example.spring_security_demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"password", "username", "enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "authorities"})
 public class LoginUser implements UserDetails {
     private User user;
 
@@ -26,7 +29,6 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getUsername() {
-
         return user.getUsername();
     }
 

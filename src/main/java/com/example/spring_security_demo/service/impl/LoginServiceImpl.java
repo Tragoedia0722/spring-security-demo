@@ -33,8 +33,6 @@ public class LoginServiceImpl implements LoginService {
         }
 
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-        System.out.println("loginUser: " + loginUser);
-
 
         String id = String.valueOf(loginUser.getUser().getId());
         String jwt = JwtUtils.createJWT(id);

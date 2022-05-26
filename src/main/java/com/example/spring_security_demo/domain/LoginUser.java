@@ -1,25 +1,40 @@
 package com.example.spring_security_demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"password", "username", "enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "authorities"})
 public class LoginUser implements UserDetails {
     private User user;
 
+    private List<String> permissions;
+
+    private List<SimpleGrantedAuthority> authorities;
+
+    public LoginUser(User user, List<String> permissions) {
+        this.user = user;
+        this.permissions = permissions;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if (authorities == null) {
+            // 将permissions中String的权限类型封装成SimpleGrantedAuthority对象
+            authorities = permissions.stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+        }
+        return authorities;
     }
 
     @Override

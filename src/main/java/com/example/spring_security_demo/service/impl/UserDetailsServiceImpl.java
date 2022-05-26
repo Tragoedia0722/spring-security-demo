@@ -4,15 +4,20 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.spring_security_demo.domain.LoginUser;
 import com.example.spring_security_demo.domain.User;
 import com.example.spring_security_demo.mapper.UserMapper;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
+/**
+ * 使用数据库验证实现用户信息查询
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Resource
@@ -27,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (Objects.isNull(user)) {
             throw new RuntimeException("用户名或密码错误");
         }
-        return new LoginUser(user);
+        List<String> list = new ArrayList<>(Arrays.asList("test", "admin"));
+        return new LoginUser(user, list);
     }
 }

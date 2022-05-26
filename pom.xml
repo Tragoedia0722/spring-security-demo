@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>spring_security_demo</artifactId>
+    <artifactId>spring-security-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring_security_demo</name>
-    <description>spring_security_demo</description>
+    <name>spring-security-demo</name>
+    <description>spring-security-demo</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

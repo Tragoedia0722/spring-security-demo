@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@TableName("t_user")
+@TableName("t_sys_user")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {

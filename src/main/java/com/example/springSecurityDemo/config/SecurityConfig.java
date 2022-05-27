@@ -42,12 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 添加过滤器
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
+        // 关闭csrf及session
+        http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         // 访问处理
-        http
-                .csrf().disable() // 关闭csrf
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 关闭SecurityContext
-                .and()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/user/login").anonymous() // 放行
                 .anyRequest().authenticated();
 
@@ -55,5 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler);
+
+        // 跨域处理
+        http.cors();
     }
 }

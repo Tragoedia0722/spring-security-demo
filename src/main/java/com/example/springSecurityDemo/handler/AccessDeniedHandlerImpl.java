@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
-
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException){
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
         ResponseUtils.write(response, Result.forbidden());
     }
 }
